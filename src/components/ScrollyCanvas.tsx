@@ -32,7 +32,7 @@ export default function ScrollyCanvas() {
     offset: ['start start', 'end end'],
   });
 
-  useEffect(() => {
+    useEffect(() => {
     const imgArray: HTMLImageElement[] = [];
     let loadedCount = 0;
 
@@ -41,7 +41,9 @@ export default function ScrollyCanvas() {
       img.src = getFramePath(i);
       img.onload = () => {
         loadedCount++;
-        if (loadedCount === FRAME_COUNT) {
+        // Mobile Fix: Start the experience as soon as the first frame is ready!
+        // Waiting for all 120 frames (96MB) causes mobile browsers to halt loading.
+        if (i === 0 || loadedCount > 5) {
           setLoaded(true);
         }
       };
@@ -51,7 +53,7 @@ export default function ScrollyCanvas() {
   }, []);
 
   const drawImage = (index: number) => {
-    if (!canvasRef.current || !images[index]) return;
+    if (!canvasRef.current || !images[index] || !images[index].complete) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
