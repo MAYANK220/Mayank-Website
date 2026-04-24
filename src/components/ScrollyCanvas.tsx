@@ -17,7 +17,7 @@ const getBasePath = () => {
 function getFramePath(index: number) {
   const paddedIndex = index.toString().padStart(3, '0');
   const basePath = getBasePath();
-  return `${basePath}/sequence/frame_${paddedIndex}_delay-0.066s.png`;
+  return `${basePath}/sequence/frame_${paddedIndex}_delay-0.066s.jpg`;
 }
 
 export default function ScrollyCanvas() {
