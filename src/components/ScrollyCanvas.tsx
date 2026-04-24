@@ -7,9 +7,11 @@ import Overlay from './Overlay';
 
 const FRAME_COUNT = 120;
 
+const basePath = process.env.NODE_ENV === 'production' ? '/Mayank-Website' : '';
+
 function getFramePath(index: number) {
   const paddedIndex = index.toString().padStart(3, '0');
-  return `/sequence/frame_${paddedIndex}_delay-0.066s.png`;
+  return `${basePath}/sequence/frame_${paddedIndex}_delay-0.066s.png`;
 }
 
 export default function ScrollyCanvas() {
